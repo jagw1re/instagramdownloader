@@ -16,3 +16,5 @@ xhttp.onreadystatechange = function () {
 // Send request to instagram post URL + parameter to open with no authentication
 xhttp.open("GET", window.location.href + "?__a=1", true);
 xhttp.send();
+// If not logged in
+// console.log(window._sharedData.entry_data.PostPage[0].graphql.shortcode_media.video_url);
