@@ -9,12 +9,20 @@ xhttp.onreadystatechange = function () {
     // Remove malformed JSON and parse it
     res = JSON.parse(this.responseText.replace(regex, ""));
     // Open URL in new tab
-    window.open(res.items[0].video_versions[0].url);
+
+    if (res.items[0].hasOwnProperty("video_versions")){
+       window.open(res.items[0].video_versions[0].url);
+    }
+    else if (res.items[0].hasOwnProperty("carousel_media")){
+      for(let i in res.items[0].carousel_media){
+        if(res.items[0].carousel_media[i].hasOwnProperty("video_versions")){
+          window.open(res.items[0].carousel_media[i].video_versions[0].url);
+        }
+      }
+    }
   }
 };
 
 // Send request to instagram post URL + parameter to open with no authentication
 xhttp.open("GET", window.location.href + "?__a=1", true);
 xhttp.send();
-// If not logged in
-// console.log(window._sharedData.entry_data.PostPage[0].graphql.shortcode_media.video_url);
