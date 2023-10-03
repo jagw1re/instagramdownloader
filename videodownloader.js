@@ -12,7 +12,8 @@ const composedReg = getComposedRegex(VDMRegex, DMRegex);
  * Retrieve json from legacy api containing original video link
  */
 async function getVideo() {
-  const response = await fetch(window.location.href + "?__a=1&__d=dis");
+  const url = window.location.href.split('?')[0]
+  const response = await fetch(url + "?__a=1&__d=dis");
   const text = await response.text();
   parseResponse(text);
 }
